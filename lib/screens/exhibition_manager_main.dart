@@ -50,7 +50,6 @@ class _ExhibitionManagerMainState extends State<ExhibitionManagerMain> {
                 await supabase.auth.signOut();
                 // ignore: use_build_context_synchronously
                 Navigator.pushNamed(context, '/');
-
                 
               },
               child: const Text('Logout'),
@@ -75,41 +74,6 @@ class _ExhibitionManagerMainState extends State<ExhibitionManagerMain> {
               //   ),
               // ),
 
-              // Expanded(
-              //   child: ListView.builder(
-              //     itemBuilder: (context, index){
-              //       return Container(
-              //         margin: const EdgeInsets.fromLTRB(10, 8, 10, 5),
-              //         decoration: const BoxDecoration(
-              //           color: Colors.white,
-              //           border: Border(
-              //             top: BorderSide(
-              //               color: Colors.red,
-              //               width: 1.0,
-              //             )
-              //           )
-              //         ),
-              //         child: const ListTile(
-              //           contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 5),
-              //           title: Column(
-              //             crossAxisAlignment: CrossAxisAlignment.start,
-              //             children: [
-              //               Row(
-              //                 mainAxisAlignment: MainAxisAlignment.start,
-              //                 children: [
-              //                   Icon(Icons.art_track),
-              //                   // Text(exhibitions[index]['exhibition_name']);
-              //                 ],
-              //               )
-                            
-              //             ],
-              //           ),
-              //         ),
-              //       );
-              //     }
-              //     )
-              // ),
-
               Expanded(
                 child: StreamBuilder(
                   stream: exhibition_list,
@@ -129,19 +93,15 @@ class _ExhibitionManagerMainState extends State<ExhibitionManagerMain> {
                               children: [
                                 Text(
                                   'Place: ${exhibitionList[index]['exhibition_place']}',
-                                  // Add any additional styling if needed
                                 ),
                                 Text(
                                   'Organization: ${exhibitionList[index]['organization']}',
-                                  // Add any additional styling if needed
                                 ),
                                 Text(
                                   'Start Date: ${exhibitionList[index]['start_date']}',
-                                  // Add any additional styling if needed
                                 ),
                                 Text(
                                   'End Date: ${exhibitionList[index]['end_date']}',
-                                  // Add any additional styling if needed
                                 ),
                                 IconButton(
                                   onPressed: () async{
