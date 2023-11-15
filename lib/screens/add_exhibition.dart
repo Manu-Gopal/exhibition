@@ -4,7 +4,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 class AddExhibition extends StatelessWidget {
   final TextEditingController exhibitionnameController = TextEditingController();
   final TextEditingController placeController = TextEditingController();
-  final TextEditingController organisationController = TextEditingController();
+  final TextEditingController organizationController = TextEditingController();
   final TextEditingController startdateController = TextEditingController();
   final TextEditingController enddateController = TextEditingController();
   AddExhibition({super.key});
@@ -12,7 +12,7 @@ class AddExhibition extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 208, 177, 167),
+      backgroundColor: const Color.fromARGB(255, 246, 244, 244),
       body: Center(
         child: SingleChildScrollView(
           child: Center(
@@ -49,10 +49,10 @@ class AddExhibition extends StatelessWidget {
 
                 const SizedBox(height: 40.0),
                 TextFormField(
-                  controller: organisationController,
+                  controller: organizationController,
                   decoration: const InputDecoration(
-                    hintText: 'Organisation',
-                    labelText: 'Organisation',
+                    hintText: 'Organization',
+                    labelText: 'Organization',
                     border: OutlineInputBorder(
                       borderSide: BorderSide(
                         color: Colors.red
@@ -66,7 +66,7 @@ class AddExhibition extends StatelessWidget {
                 TextFormField(
                   controller: startdateController,
                   decoration: const InputDecoration(
-                    hintText: 'Starting Date',
+                    hintText: 'Starting Date (yyyy-mm-dd)',
                     labelText: 'Starting Date',
                     border: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.red),
@@ -79,7 +79,7 @@ class AddExhibition extends StatelessWidget {
                 TextFormField(
                   controller: enddateController,
                   decoration: const InputDecoration(
-                    hintText: 'Ending Date',
+                    hintText: 'Ending Date (yyyy-mm-dd)',
                     labelText: 'Ending Date',
                     border: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.red),
@@ -94,11 +94,11 @@ class AddExhibition extends StatelessWidget {
                     final supabase = Supabase.instance.client;
                     String exhibitionName = exhibitionnameController.text;
                     String place = placeController.text;
-                    String organisation = organisationController.text;
+                    String organization = organizationController.text;
                     String startDate = startdateController.text;
                     String endDate = enddateController.text;
 
-                    if (exhibitionName.isEmpty || place.isEmpty || organisation.isEmpty || startDate.isEmpty || endDate.isEmpty) {
+                    if (exhibitionName.isEmpty || place.isEmpty || organization.isEmpty || startDate.isEmpty || endDate.isEmpty) {
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(
                           content: Text('Please fill all details.'),
@@ -112,7 +112,7 @@ class AddExhibition extends StatelessWidget {
                       final Map<String , dynamic> userDetails = {
                         'exhibition_name' : exhibitionName,
                         'exhibition_place' : place,
-                        'organisation' : organisation,
+                        'organization' : organization,
                         'start_date' : startDate,
                         'end_date' : endDate,
                       };
@@ -122,18 +122,11 @@ class AddExhibition extends StatelessWidget {
                       // ignore: use_build_context_synchronously
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(
-                          content: Text('Account Created Successfully.'),
+                          content: Text('Exhibition addded Successfully.'),
                           duration: Duration(seconds: 3),
                         )
                       );
                     }
-
-                    // final response = await supabase
-                    // await supabase
-                    // .from('account')
-                    // .upsert([
-                    //   {'name': name, 'email': email, 'password': password, 'phone': phone}
-                    //   ]);
 
                     // ignore: use_build_context_synchronously
                     Navigator.pushNamed(context, '/exhibition_manager_main');
@@ -147,10 +140,13 @@ class AddExhibition extends StatelessWidget {
                     )
                   ),
                   child: const Text(
-                    'Add Exhibition',
+                    'Add',
                     style: TextStyle(fontSize: 20.0),
                   ),
                 ),
+                ElevatedButton(onPressed: (){
+                  Navigator.pushNamed(context, '/exhibition_manager_main');
+                }, child: const Text("back"))
               ],
             )
             

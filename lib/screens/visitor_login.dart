@@ -92,7 +92,7 @@ class VisitorLogin extends StatelessWidget {
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(
                           content: Text('Kurach neram kuninj nikk myre.'),
-                          duration: Duration(seconds:  5),
+                          duration: Duration(seconds: 3),
                         )
                       );
                       return;
