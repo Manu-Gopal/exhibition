@@ -1,25 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-class AddStall extends StatefulWidget {
-  const AddStall({super.key});
+class AddItems extends StatefulWidget {
+  const AddItems({super.key});
 
   @override
-  State<AddStall> createState() => AddStallState();
-}  
+  State<AddItems> createState() => _AddItemsState();
+}
 
-class AddStallState extends State<AddStall> {
-  final TextEditingController stallnameController = TextEditingController();
-  final TextEditingController stalltypeController = TextEditingController();
+class _AddItemsState extends State<AddItems> {
+  final TextEditingController itemnameController = TextEditingController();
+  final TextEditingController itempriceController = TextEditingController();
+  final TextEditingController itemdiscountController = TextEditingController();
+  final TextEditingController itemquantityController = TextEditingController();
 
-  dynamic exhibitionId;
+  dynamic stallId;
 
   @override
   void initState() {
     super.initState();
     Future.delayed(Duration.zero,(){
-      exhibitionId = ModalRoute.of(context)?.settings.arguments as Map?;
-
+      stallId = ModalRoute.of(context)?.settings.arguments as Map?;
     });
   }
 
@@ -36,10 +37,10 @@ class AddStallState extends State<AddStall> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   TextFormField(
-                    controller: stallnameController,
+                    controller: itemnameController,
                     decoration: const InputDecoration(
-                      hintText: 'Stall Name',
-                      labelText: 'Stall Name',
+                      hintText: 'Item Name',
+                      labelText: 'Item Name',
                       border: OutlineInputBorder(
                           borderSide: BorderSide(color: Colors.red),
                           borderRadius: BorderRadius.all(Radius.circular(9.0))),
@@ -47,23 +48,48 @@ class AddStallState extends State<AddStall> {
                   ),
                   const SizedBox(height: 40.0),
                   TextFormField(
-                    controller: stalltypeController,
+                    controller: itempriceController,
                     decoration: const InputDecoration(
-                      hintText: 'Stall Type',
-                      labelText: 'Stall Type',
+                      hintText: 'Price',
+                      labelText: 'Price',
                       border: OutlineInputBorder(
                           borderSide: BorderSide(color: Colors.red),
                           borderRadius: BorderRadius.all(Radius.circular(9.0))),
                     ),
                   ),
                   const SizedBox(height: 40.0),
+                  TextFormField(
+                    controller: itemdiscountController,
+                    decoration: const InputDecoration(
+                      hintText: 'Discount',
+                      labelText: 'Discount',
+                      border: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.red),
+                          borderRadius: BorderRadius.all(Radius.circular(9.0))),
+                    ),
+                  ),
+                  const SizedBox(height: 40.0),
+                  TextFormField(
+                    controller: itemquantityController,
+                    decoration: const InputDecoration(
+                      hintText: 'Quantity',
+                      labelText: 'Quantity',
+                      border: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.red),
+                          borderRadius: BorderRadius.all(Radius.circular(9.0))
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 40.0),
                   ElevatedButton(
                     onPressed: () async {
                       final supabase = Supabase.instance.client;
-                      String stallName = stallnameController.text;
-                      String stallType = stalltypeController.text;
+                      String itemName = itemnameController.text;
+                      String itemPrice = itempriceController.text;
+                      String itemDiscount = itemdiscountController.text;
+                      String itemQuantity = itemquantityController.text;
 
-                      if (stallName.isEmpty || stallType.isEmpty) {
+                      if (itemName.isEmpty || itemPrice.isEmpty || itemDiscount.isEmpty || itemQuantity.isEmpty) {
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(
                             content: Text('Please fill all details.'),
@@ -73,17 +99,19 @@ class AddStallState extends State<AddStall> {
                         return;
                       } else {
                         final Map<String, dynamic> userDetails = {
-                          'stall_name': stallName,
-                          'stall_type': stallType,
-                          'exhibition_id': exhibitionId['exhibition_id']
+                          'item_name': itemName,
+                          'item_price': itemPrice,
+                          'item_discount': itemDiscount,
+                          'item_quantity': itemQuantity,
+                          'stall_id': stallId['stall_id']
                         };
 
-                        await supabase.from('add_stall').insert(userDetails);
+                        await supabase.from('add_items').insert(userDetails);
 
                         // ignore: use_build_context_synchronously
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(
-                            content: Text('Stall added Successfully.'),
+                            content: Text('Item added Successfully.'),
                             duration: Duration(seconds: 3),
                           ),
                         );
@@ -115,4 +143,3 @@ class AddStallState extends State<AddStall> {
     );
   }
 }
-

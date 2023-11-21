@@ -113,7 +113,7 @@ class _ExhibitionManagerMainState extends State<ExhibitionManagerMain> {
                             ),
                           );
                         }
-                        );
+                      );
                     }
                     return Container();
                   }

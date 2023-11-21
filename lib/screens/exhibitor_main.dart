@@ -98,7 +98,9 @@ class _ExhibitorMainState extends State<ExhibitorMain> {
                                   padding: const EdgeInsets.all(5.0),
                                   child: GestureDetector(
                                     onTap: () {
-                                      
+                                      Navigator.pushNamed(context, '/list_stall',arguments: {
+                                        'exhibition_id' :exhibitionList[index]['id'] 
+                                      });
                                     },
                                     child: const Icon(Icons.keyboard_arrow_right_outlined, size: 25, color: Colors.black),
                                   ),
@@ -120,5 +122,3 @@ class _ExhibitorMainState extends State<ExhibitorMain> {
     );
   }
 }
-
-

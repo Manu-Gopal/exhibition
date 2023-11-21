@@ -91,7 +91,7 @@ class VisitorLogin extends StatelessWidget {
                       // ignore: use_build_context_synchronously
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(
-                          content: Text('Kurach neram kuninj nikk myre.'),
+                          content: Text('Invalid Entry.'),
                           duration: Duration(seconds: 3),
                         )
                       );
