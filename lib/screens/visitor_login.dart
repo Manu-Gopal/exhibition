@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class VisitorLogin extends StatelessWidget {
@@ -80,10 +81,16 @@ class VisitorLogin extends StatelessWidget {
                       return;
                     }
                     try{
+                      String userId = "";
                       await supabase.auth.signInWithPassword(
                         email: email,
                         password: password,
                       );
+                      await OneSignal.shared.getDeviceState().then((deviceState) {
+                      userId = deviceState!.userId.toString(); // Use this ID to identify the user
+                      });
+
+                      await supabase.from('profile').update({'onesignaluserid':userId}).match({'user_id': supabase.auth.currentUser!.id});
                       // ignore: use_build_context_synchronously
                       Navigator.pushNamedAndRemoveUntil(context, '/visitor_main', (route) => false);
 

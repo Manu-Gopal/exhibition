@@ -18,6 +18,7 @@ class _AddItemsState extends State<VisitorListitems> {
   dynamic stallId;
   bool isLoading = false;
   dynamic itemLists;
+  dynamic exId;
   dynamic searchItem;
 
   @override
@@ -33,6 +34,8 @@ class _AddItemsState extends State<VisitorListitems> {
     itemLists = Supabase.instance.client
       .from('add_items')
       .stream(primaryKey: ['id']).eq('stall_id', stallId['stall_id']).order('id');
+
+    exId = stallId['exhibition_id'];
       setState(() {
         
       });
@@ -52,17 +55,6 @@ class _AddItemsState extends State<VisitorListitems> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              // ElevatedButton(
-              //   onPressed: (){
-              //     Navigator.pushNamed(
-              //       context, '/visitor_search_item',
-              //       arguments: {
-              //         'stall_id' :itemLists[0]['id']
-              //       }
-              //     );
-              //   }, 
-              // child: const Text("Search Item"),
-              // ),
 
               TextField(
                 controller: searchController,
@@ -71,6 +63,7 @@ class _AddItemsState extends State<VisitorListitems> {
                   onTap: () {
                       if(searchController.text.isNotEmpty){
                       Navigator.pushNamed(context,'/visitor_search_item', arguments: {
+                        'exhibition_id' : exId,
                         'stallId': stallId['stall_id'], 'searchText': searchController.text
                       });
                     }
@@ -130,7 +123,9 @@ class _AddItemsState extends State<VisitorListitems> {
                                       onTap: () {
                                         Navigator.pushNamed(
                                           context, '/book_items', arguments: {
-                                            'item_id' : itemList[index]['id']
+                                            'item_id' : itemList[index]['id'],
+                                            'stall_id' : itemList[index]['stall_id'],
+                                            'exhibition_id' : exId,
                                             // 'stall_id': stallList[index]['id']
                                           });
                                       },

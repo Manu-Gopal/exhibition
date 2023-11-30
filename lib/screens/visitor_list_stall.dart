@@ -97,7 +97,8 @@ class _VisitorListStallState extends State<VisitorListStall> {
                                         Navigator.pushNamed(
                                             context, '/visitor_list_items',
                                             arguments: {
-                                              'stall_id': stallList[index]['id']
+                                              'stall_id': stallList[index]['id'],
+                                              'exhibition_id' : exhibitionId
                                             });
                                       },
                                       child: const Icon(

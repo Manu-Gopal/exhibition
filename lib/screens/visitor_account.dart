@@ -128,13 +128,6 @@ class VisitorAccount extends StatelessWidget {
                       );
                     }
 
-                    // final response = await supabase
-                    // await supabase
-                    // .from('account')
-                    // .upsert([
-                    //   {'name': name, 'email': email, 'password': password, 'phone': phone}
-                    //   ]);
-
                     // ignore: use_build_context_synchronously
                     Navigator.pushNamed(context, '/visitor');
                     

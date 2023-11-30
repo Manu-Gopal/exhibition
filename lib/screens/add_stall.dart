@@ -19,7 +19,6 @@ class AddStallState extends State<AddStall> {
     super.initState();
     Future.delayed(Duration.zero,(){
       exhibitionId = ModalRoute.of(context)?.settings.arguments as Map?;
-
     });
   }
 

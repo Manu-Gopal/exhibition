@@ -124,35 +124,47 @@ class _ExhibitorListitemsState extends State<ExhibitorListitems> {
                                     ),
                                     IconButton(
                                       onPressed: () async{
-                                        await supabase.from('add_items').delete().match({'id':itemList[index]['id']});
+                                        showDialog(
+                                          context: context,
+                                          builder: (BuildContext context) {
+                                            return AlertDialog(
+                                              title: const Text(
+                                                'Delete Items'
+                                              ),
+                                              content: const Text(
+                                                'Are you sure you want to delete the item..?'
+                                              ),
+                                              actions: [
+                                                ElevatedButton(
+                                                  onPressed: ()async{
+                                                    await supabase
+                                                            .from('add_items')
+                                                            .delete()
+                                                            .match({
+                                                          'id': itemList[index]['id']
+                                                        });
+                                                        // ignore: use_build_context_synchronously
+                                                        Navigator.pop(context);
+                                                  },
+                                                child: const Text('Yes'),
+                                                ),
+                                                ElevatedButton(
+                                                  onPressed: () {
+                                                    Navigator.pop(
+                                                        context); // Close the dialog
+                                                  },
+                                                  child: const Text('No'),
+                                                ),
+                                              ],
+                                            );
+                                          }
+                                        );
+                                        // await supabase.from('add_items').delete().match({'id':itemList[index]['id']});
                                       },
                                       icon: const Icon(Icons.delete)
                                     )
                                   ],
                                 ),
-                                // trailing: Container(
-                                //   decoration: const BoxDecoration(
-                                //     color: Colors.grey,
-                                //     shape: BoxShape.rectangle,
-                                //     borderRadius:
-                                //         BorderRadius.all(Radius.circular(10)),
-                                //   ),
-                                //   child: Padding(
-                                //     padding: const EdgeInsets.all(5.0),
-                                //     child: GestureDetector(
-                                //       onTap: () {
-                                        
-                                //       },
-                                //       child: const Text(
-                                //         'Book Now',
-                                //         style: TextStyle(
-                                //           color: Colors.black,
-                                //           fontSize: 16
-                                //         ),
-                                //       ),
-                                //     ),
-                                //   ),
-                                // ),
                               ),
                             );
                           }

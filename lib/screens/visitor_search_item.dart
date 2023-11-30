@@ -16,6 +16,7 @@ class _VisitorSearchItemState extends State<VisitorSearchItem> {
   bool isLoading = false;
   dynamic itemLists;
   dynamic searchItem;
+  dynamic exId;
   // ignore: non_constant_identifier_names
   List itemList = [];
 
@@ -29,6 +30,7 @@ class _VisitorSearchItemState extends State<VisitorSearchItem> {
   }
 
   Future getItems() async {
+    exId = stallDetails['exhibition_id'];
     setState(() {
       isLoading = true;
     });
@@ -99,10 +101,14 @@ class _VisitorSearchItemState extends State<VisitorSearchItem> {
                                     padding: const EdgeInsets.all(5.0),
                                     child: GestureDetector(
                                       onTap: () {
-                                        Navigator.pushNamed(context, '/book_items',
-                                        arguments: {
-                                          
-                                        });
+                                        Navigator.pushNamed(
+                                          context, '/book_items',
+                                          arguments: {
+                                            'item_id' : itemList[index]['id'],
+                                            'stall_id' : itemList[index]['stall_id'],
+                                            'exhibition_id' : exId,
+                                            // 'stall_id': stallList[index]['id']
+                                          });
                                         //  Navigator.pushNamed(context,'/visitor_search_item', arguments: {
                                         //   'stallId': stallId['stall_id'], 'searchText': searchController.text
                                         // });

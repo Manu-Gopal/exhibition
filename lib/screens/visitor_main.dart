@@ -1,3 +1,4 @@
+// import 'package:exhibition/screens/visitor_bookings.dart';
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -157,7 +158,8 @@ class CustomDrawerState extends State<CustomDrawer> {
           ),
           ListTile(
             onTap: () {
-              Navigator.pop(context);
+              Navigator.pushNamed(context, '/visitor_bookings');
+              // Navigator.push(context, MaterialPageRoute(builder: (context) => const VisitorBookings()));
             },
             leading: const Icon(
               Icons.shop,
