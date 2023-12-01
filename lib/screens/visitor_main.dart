@@ -123,6 +123,9 @@ class CustomDrawerState extends State<CustomDrawer> {
 
   final supabase = Supabase.instance.client;
   dynamic useremail = '';
+  int bookQty = 0;
+
+  
 
   @override
   void initState() {
@@ -158,6 +161,7 @@ class CustomDrawerState extends State<CustomDrawer> {
           ),
           ListTile(
             onTap: () {
+
               Navigator.pushNamed(context, '/visitor_bookings');
               // Navigator.push(context, MaterialPageRoute(builder: (context) => const VisitorBookings()));
             },

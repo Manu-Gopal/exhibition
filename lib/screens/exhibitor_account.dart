@@ -38,6 +38,10 @@ class ExhibitorAccount extends StatelessWidget {
                     decoration: const InputDecoration(
                       hintText: 'Name',
                       labelText: 'Name',
+                      prefixIcon: Icon(
+                      Icons.person,
+                      color: Colors.blue,
+                    ),
                       border: OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.red),
                         borderRadius: BorderRadius.all(Radius.circular(9.0))

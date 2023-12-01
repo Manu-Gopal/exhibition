@@ -182,7 +182,7 @@ class _BookItemsState extends State<BookItems> {
                 'available_qty' : availableQty,
               });
               // ignore: use_build_context_synchronously
-              ScaffoldMessenger.of(context).showSnackBar(
+              ScaffoldMessenger.  of(context).showSnackBar(
                 const SnackBar(
                   content: Text('Item booked successfully. Wait for the exhibitor response'),
                   duration: Duration(seconds: 3),

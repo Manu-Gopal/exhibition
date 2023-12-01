@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -14,7 +15,8 @@ class _VisitorBookingsState extends State<VisitorBookings> {
 
   dynamic visitorBookList;
   dynamic items;
-  int bookId = 0;
+  dynamic bookQty;
+  dynamic itemQty;
 
   @override
   void initState() {
@@ -26,30 +28,23 @@ class _VisitorBookingsState extends State<VisitorBookings> {
 
     final visitorProfile = await supabase.from('profile').select('id').match({'user_id': supabase.auth.currentUser!.id});
 
-    // items = await supabase.from('book_item').select().match({'user_id':visitorProfile[0]['id']});
     items = Supabase.instance.client
       .from('book_item')
       .stream(primaryKey: ['id'])
       .eq('user_id', visitorProfile[0]['id'])
-      // .inFilter('stall_id', stallIds)
       .order('id');
-
-    // List userIds = [];
-    // for(dynamic item in items){
-    //   userIds.add(item['id']);
-    // }
-
-      // visitorBookList = Supabase.instance.client
-      // .from('book_item')
-      // .stream(primaryKey: ['id'])
-      // .inFilter('user_id', userIds)
-      // .order('id');
-      // print(visitorBookList);
       
     setState(() {
-      // bookId = items['id'];
-      // print(bookId);
     });
+  }
+
+  void openSnackBar(String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message),
+        duration: const Duration(seconds: 2),
+      )
+    );
   }
 
   @override
@@ -58,7 +53,9 @@ class _VisitorBookingsState extends State<VisitorBookings> {
       appBar: AppBar(
         title: const Text("Visitor Bookings"),
       ),
-      body: Center(
+      body: RefreshIndicator(
+        onRefresh: getBookingDetails,
+        child: Center(
         child: Padding(
           padding: const EdgeInsets.all(16),
           child: Column(
@@ -82,15 +79,12 @@ class _VisitorBookingsState extends State<VisitorBookings> {
                             ),
                             child: ListTile(
                               title: Text(
-                                // 'Item : ${bookList[index]['item_name']}',
                                 itemList[index]['item_name'],
                                 style: const TextStyle(fontWeight: FontWeight.bold),
                               ),
                               subtitle: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  // bookId = itemList[index]['id'],
-                                  // Text('Exhibition name : ${itemList[index]['exhibition_name']}'),
                                   Text('Stall name : ${itemList[index]['stall_name']}'),
                                   Text('Quantity : ${itemList[index]['quantity']}'),
                                   Text('Delivery Date : ${itemList[index]['delivery_date']}'),
@@ -104,10 +98,6 @@ class _VisitorBookingsState extends State<VisitorBookings> {
                                               : Colors.blue,
                                     ),
                                   )
-                                  // Text('Status: ${itemList[index]['approved'] == true ? 'Accepted' : itemList[index]['approved'] == false ? 'Rejected' : 'Pending'}',
-
-                                  // )
-                                  // Text('Status : ${itemList[index]['quantity']}'),
                                 ],
                               ),
                               trailing: Container(
@@ -126,11 +116,63 @@ class _VisitorBookingsState extends State<VisitorBookings> {
                                   padding: const EdgeInsets.all(5.0),
                                   child: GestureDetector(
                                     onTap: () {
+                                      if (itemList[index]["delivery_date"] != null){
+                                      
                                       // DateTime delivery_date = itemList[index]["delivery_date"];
                                      -DateTime.now().difference(DateTime.parse(itemList[index]["delivery_date"]))
                                       .inHours < 24
                                       ? null
                                       : showDialog(
+                                              context: context,
+                                              builder: (BuildContext context) {
+                                                return AlertDialog(
+                                                  title: const Text(
+                                                      'Cancel Booking'),
+                                                  content: const Text(
+                                                      'Are you sure you want to cancel the booking'),
+                                                  actions: [
+                                                    ElevatedButton(
+                                                      onPressed: () async {
+                                                        // bookQty = itemList[index]['quantity'];
+                                                        itemQty = itemList[index]['available_qty'];
+                                                        bool isApproved = itemList[index]['approved'] ?? false;
+                                                        if(isApproved){
+                                                          int newQty = itemQty;
+                                                        await supabase.from('add_items')
+                                                          .update({'item_quantity': newQty})
+                                                          .match({'id': itemList[index]['item_id']});
+                                                        }
+                                                        
+                                                        await supabase
+                                                            .from('book_item')
+                                                            .delete()
+                                                            .match({
+                                                          'id': itemList[index]['id']
+                                                        });                                                         
+                                                        // ignore: use_build_context_synchronously
+                                                        Navigator.pop(context);
+
+                                                        openSnackBar("Your booking has been cancelled successfully");
+                                                            
+                                                      },
+                                                      child: const Text('Yes'),
+                                                    ),
+                                                    ElevatedButton(
+                                                      onPressed: () {
+                                                        Navigator.pop(
+                                                            context); // Close the dialog
+                                                        openSnackBar("Your booking has not been cancelled");
+                                                      },
+                                                      child: const Text('No'),
+                                                    ),
+                                                  ],
+                                                );
+                                                
+                                              },
+                                            );
+                                      }
+                                      else{
+                                        showDialog(
                                               context: context,
                                               builder: (BuildContext context) {
                                                 return AlertDialog(
@@ -150,6 +192,7 @@ class _VisitorBookingsState extends State<VisitorBookings> {
                                                         // ignore: use_build_context_synchronously
                                                         Navigator.pop(
                                                             context); // Close the dialog
+                                                        openSnackBar("Your booking has been cancelled successfully!");
                                                       },
                                                       child: const Text('Yes'),
                                                     ),
@@ -157,6 +200,7 @@ class _VisitorBookingsState extends State<VisitorBookings> {
                                                       onPressed: () {
                                                         Navigator.pop(
                                                             context); // Close the dialog
+                                                            openSnackBar("Your booking has not been cancelled");
                                                       },
                                                       child: const Text('No'),
                                                     ),
@@ -164,9 +208,7 @@ class _VisitorBookingsState extends State<VisitorBookings> {
                                                 );
                                               },
                                             );
-                                      // Navigator.pushNamed(context, '/visitor_list_stall',arguments: {
-                                      //   'exhibition_id' :exhibitionList[index]['id'] 
-                                      // });
+                                      }
                                     },
                                     child: const Text('Cancel', style: TextStyle(color: Colors.white)),
                                   ),
@@ -188,6 +230,7 @@ class _VisitorBookingsState extends State<VisitorBookings> {
             ],
           ),
         ),
+      ),
       ),
     );
   }

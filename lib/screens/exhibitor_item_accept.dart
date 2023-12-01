@@ -195,7 +195,6 @@ class _ItemAcceptState extends State<ItemAccept> {
               });
               const message = "Your booking has been accepted";
               sendPushNotification(profile[0]['onesignaluserid'], message );
-              print("Pushed the notification");
 
               // ignore: use_build_context_synchronously
               Navigator.pop(context);

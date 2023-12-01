@@ -6,20 +6,58 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 208, 177, 167),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
+  body: Container(
+    decoration: const BoxDecoration(
+      gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              colors: [
+                Color.fromARGB(255, 3, 144, 163),
+                Color.fromARGB(255, 3, 201, 227),
+                Color.fromARGB(255, 2, 155, 175)
+              ]
+            )
+    ),
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+          
           // image
           const Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text('Exhibition Management System',
-              style: TextStyle(
-                fontSize: 25,
-                fontWeight: FontWeight.bold,
-                color: Colors.black
-              ),
+              Text(
+                'Exhibition',
+                style: TextStyle(
+                    fontSize: 45,
+                    fontFamily: 'NovaSquare',
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black),
+              )
+            ],
+          ),
+          const Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                'Management',
+                style: TextStyle(
+                    fontSize: 45,
+                    fontFamily: 'NovaSquare',
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black),
+              )
+            ],
+          ),
+          const Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                'System',
+                style: TextStyle(
+                    fontSize: 45,
+                    fontFamily: 'NovaSquare',
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black),
               )
             ],
           ),
@@ -31,20 +69,24 @@ class HomePage extends StatelessWidget {
                 width: 100,
                 height: 50,
                 child: ElevatedButton(
-                  onPressed: (){
-                    Navigator.pushNamed(context, '/exhibition_manager');
-                  },
-                  style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all<Color>(Colors.blueGrey),
-                  ),
-                  child: const Text('Exhibition Manager',
-                  style: TextStyle(
-                    fontSize: 15,
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold
-                  ),
-                  )
-                ),
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/exhibition_manager');
+                    },
+                    style: ButtonStyle(
+                      backgroundColor:
+                          MaterialStateProperty.all<Color>(const Color.fromARGB(255, 99, 172, 172)),
+                      shape: MaterialStateProperty.all<OutlinedBorder>(
+                        RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10.0)),
+                      ),
+                    ),
+                    child: const Text(
+                      'Exhibition Manager',
+                      style: TextStyle(
+                          fontSize: 15,
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold),
+                    )),
               ),
             ],
           ),
@@ -56,48 +98,56 @@ class HomePage extends StatelessWidget {
               SizedBox(
                 width: 100,
                 child: ElevatedButton(
-                  onPressed: (){
-                    Navigator.pushNamed(context, '/exhibitor');
-                  },
-                  style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all<Color>(Colors.grey),
-                  ),
-                  child: const Text('Exhibitor',
-                  style: TextStyle(
-                    fontSize: 15,
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold
-                  ),
-                  )
-                ),
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/exhibitor');
+                    },
+                    style: ButtonStyle(
+                      backgroundColor:
+                          MaterialStateProperty.all<Color>(const Color.fromARGB(255, 99, 172, 172)),
+                      shape: MaterialStateProperty.all<OutlinedBorder>(
+                        RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10.0)),
+                      ),
+                    ),
+                    child: const Text(
+                      'Exhibitor',
+                      style: TextStyle(
+                          fontSize: 15,
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold),
+                    )),
               ),
               const SizedBox(width: 20),
               SizedBox(
                 width: 100,
                 child: ElevatedButton(
-                  onPressed: (){
-                    Navigator.pushNamed(context, '/visitor');
-                  },
-                  style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all<Color>(Colors.grey),
-                  ),
-                  child: const Text('Visitor',
-                  style: TextStyle(
-                    fontSize: 15,
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold
-                  ),
-                  )
-                ),
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/visitor');
+                    },
+                    style: ButtonStyle(
+                      backgroundColor:
+                          MaterialStateProperty.all<Color>(const Color.fromARGB(255, 99, 172, 172)),
+                      shape: MaterialStateProperty.all<OutlinedBorder>(
+                        RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10.0)),
+                      ),
+                    ),
+                    child: const Text(
+                      'Visitor',
+                      style: TextStyle(
+                          fontSize: 15,
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold),
+                    )),
               )
             ],
           )
-              
-              
-            ],
-          ),
-      
-      );
-  
+        ],
+    ),
+  ),
+);
+
   }
 }
+
+
