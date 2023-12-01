@@ -156,6 +156,7 @@ class ExhibitorInputWrapper extends StatelessWidget {
                     'Sign In',
                     style: TextStyle(
                       fontSize: 20.0,
+                      color: Colors.black,
                       fontFamily: 'NovaSquare',
                     ),
                   ),
@@ -168,7 +169,7 @@ class ExhibitorInputWrapper extends StatelessWidget {
               const Text(
                 "Don't have an account..? ",
                 style: TextStyle(
-                  fontSize: 15,
+                  fontSize: 17,
                   fontWeight: FontWeight.bold,
                   fontFamily: 'NovaSquare',
                   color: Colors.black,
@@ -181,7 +182,7 @@ class ExhibitorInputWrapper extends StatelessWidget {
                 child: const Text(
                   'Sign up',
                   style: TextStyle(
-                    fontSize: 15,
+                    fontSize: 17,
                     fontWeight: FontWeight.bold,
                     fontFamily: 'NovaSquare',
                     color: Colors.blue,

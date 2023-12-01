@@ -63,16 +63,6 @@ class _ExhibitionManagerMainState extends State<ExhibitionManagerMain> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              // TextField(
-              //   decoration: InputDecoration(
-              //     border: OutlineInputBorder(
-              //       borderRadius: BorderRadius.circular(20),
-              //     ),
-              //     hintText: "Search an Exhibition",
-              //     prefixIcon: const Icon(Icons.search),
-              //   ),
-              // ),
-
               Expanded(
                   child: StreamBuilder(
                       stream: exhibition_list,

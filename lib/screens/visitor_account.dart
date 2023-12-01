@@ -11,28 +11,36 @@ class VisitorAccount extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-          backgroundColor: Colors.blueAccent,
-          leading: IconButton(
-            onPressed: (){
-              Navigator.pushNamed(context, '/visitor');
-            },
-            icon: const Icon(Icons.arrow_back)
-            ),
-          title: const Text("Visitor Account"),
-          centerTitle: true,
-        ),
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.cyan,
 
-      body: Center(
-        child: SingleChildScrollView(
-          child: Center(
+      body: SingleChildScrollView(
+          child: Container(
+            decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              colors: [
+                Color.fromARGB(255, 3, 144, 163),
+                Color.fromARGB(255, 3, 201, 227),
+                Color.fromARGB(255, 2, 155, 175)
+              ]
+            )
+          ),
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-
+                const SizedBox(height: 80,),
+                const Text(
+                  'Visitor', // Heading text
+                  style: TextStyle(
+                    fontSize: 30,
+                    fontFamily: 'NovaSquare',
+                    fontWeight: FontWeight.bold,
+                    color: Color.fromARGB(255, 78, 66, 66),
+                  ),
+                ),
+                const SizedBox(height: 80,),
                 TextFormField(
                   controller: nameController,
                   decoration: const InputDecoration(
@@ -40,11 +48,11 @@ class VisitorAccount extends StatelessWidget {
                     labelText: 'Name',
                     prefixIcon: Icon(
                       Icons.person,
-                      color: Colors.blue,
+                      color: Color.fromARGB(255, 78, 66, 66),
                     ),
                     border: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.red),
-                      borderRadius: BorderRadius.all(Radius.circular(9.0))
+                      borderRadius: BorderRadius.all(Radius.circular(20.0))
                     )
                   ),
                 ),
@@ -55,9 +63,13 @@ class VisitorAccount extends StatelessWidget {
                   decoration: const InputDecoration(
                     hintText: 'Email',
                     labelText: 'Email',
+                    prefixIcon: Icon(
+                      Icons.mail,
+                      color: Color.fromARGB(255, 78, 66, 66),
+                    ),
                     border: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.red),
-                      borderRadius: BorderRadius.all(Radius.circular(9.0))
+                      borderSide: BorderSide(color: Colors.white),
+                      borderRadius: BorderRadius.all(Radius.circular(20.0))
                     )
                   ),
                 ),
@@ -69,11 +81,15 @@ class VisitorAccount extends StatelessWidget {
                   decoration: const InputDecoration(
                     hintText: 'Password',
                     labelText: 'Password',
+                    prefixIcon: Icon(
+                      Icons.key,
+                      color: Color.fromARGB(255, 78, 66, 66),
+                    ),
                     border: OutlineInputBorder(
                       borderSide: BorderSide(
                         color: Colors.red
                       ),
-                      borderRadius: BorderRadius.all(Radius.circular(9.0))
+                      borderRadius: BorderRadius.all(Radius.circular(20.0))
                     )
                   ),
                 ),
@@ -84,9 +100,13 @@ class VisitorAccount extends StatelessWidget {
                   decoration: const InputDecoration(
                     hintText: 'Phone No',
                     labelText: 'Phone No',
+                    prefixIcon: Icon(
+                      Icons.phone,
+                      color: Color.fromARGB(255, 78, 66, 66),
+                    ),
                     border: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.red),
-                      borderRadius: BorderRadius.all(Radius.circular(9.0))
+                      borderRadius: BorderRadius.all(Radius.circular(20.0))
                     )
                   ),
                 ),
@@ -137,17 +157,25 @@ class VisitorAccount extends StatelessWidget {
                     
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.green,
+                    backgroundColor: const Color.fromARGB(255, 99, 172, 172),
                     padding: const EdgeInsets.symmetric(
-                      horizontal: 50,
+                      horizontal: 90,
                       vertical: 15
-                    )
+                    ),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20)
+                    ),
                   ),
                   child: const Text(
                     'Create Account',
-                    style: TextStyle(fontSize: 20.0),
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 20.0,
+                      fontFamily: 'NovaSquare',
+                    ),
                   ),
                 ),
+                const SizedBox(height: 125,)
               ],
             )
             
@@ -155,7 +183,6 @@ class VisitorAccount extends StatelessWidget {
           
         ),
         ),
-      )
-    );
+      ) ;
   }
 }

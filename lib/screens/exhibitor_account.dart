@@ -11,159 +11,178 @@ class ExhibitorAccount extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-          backgroundColor: Colors.blueAccent,
-          leading: IconButton(
-            onPressed: (){
-              Navigator.pushNamed(context, '/exhibitor');
-            },
-            icon: const Icon(Icons.arrow_back)
-            ),
-          title: const Text("Exhibitor Account"),
-          centerTitle: true,
-        ),
-      backgroundColor: Colors.white,
-      body: Center(
-        child: Center(
-          child: SingleChildScrollView(
-            child: Center(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
+      backgroundColor: Colors.cyan,
 
-                  TextFormField(
-                    controller: nameController,
-                    decoration: const InputDecoration(
-                      hintText: 'Name',
-                      labelText: 'Name',
-                      prefixIcon: Icon(
+      body: SingleChildScrollView(
+          child: Container(
+            decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              colors: [
+                Color.fromARGB(255, 3, 144, 163),
+                Color.fromARGB(255, 3, 201, 227),
+                Color.fromARGB(255, 2, 155, 175)
+              ]
+            )
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const SizedBox(height: 80,),
+                const Text(
+                  'Exhibitor', // Heading text
+                  style: TextStyle(
+                    fontSize: 30,
+                    fontFamily: 'NovaSquare',
+                    fontWeight: FontWeight.bold,
+                    color: Color.fromARGB(255, 78, 66, 66),
+                  ),
+                ),
+                const SizedBox(height: 80,),
+                TextFormField(
+                  controller: nameController,
+                  decoration: const InputDecoration(
+                    hintText: 'Name',
+                    labelText: 'Name',
+                    prefixIcon: Icon(
                       Icons.person,
-                      color: Colors.blue,
+                      color: Color.fromARGB(255, 78, 66, 66),
                     ),
-                      border: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.red),
-                        borderRadius: BorderRadius.all(Radius.circular(9.0))
-                      )
-                    ),
+                    border: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.red),
+                      borderRadius: BorderRadius.all(Radius.circular(20.0))
+                    )
                   ),
+                ),
 
-                  const SizedBox(height: 40.0),
-                  TextFormField(
-                    controller: emailController,
-                    decoration: const InputDecoration(
-                      hintText: 'Email',
-                      labelText: 'Email',
-                      border: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.red),
-                        borderRadius: BorderRadius.all(Radius.circular(9.0))
-                      )
+                const SizedBox(height: 40.0),
+                TextFormField(
+                  controller: emailController,
+                  decoration: const InputDecoration(
+                    hintText: 'Email',
+                    labelText: 'Email',
+                    prefixIcon: Icon(
+                      Icons.mail,
+                      color: Color.fromARGB(255, 78, 66, 66),
                     ),
+                    border: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.white),
+                      borderRadius: BorderRadius.all(Radius.circular(20.0))
+                    )
                   ),
+                ),
 
-                  const SizedBox(height: 40.0),
-                  TextFormField(
-                    controller: passwordController,
-                    obscureText: true,
-                    decoration: const InputDecoration(
-                      hintText: 'Password',
-                      labelText: 'Password',
-                      border: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Colors.red
-                        ),
-                        borderRadius: BorderRadius.all(Radius.circular(9.0))
-                      )
+                const SizedBox(height: 40.0),
+                TextFormField(
+                  controller: passwordController,
+                  obscureText: true,
+                  decoration: const InputDecoration(
+                    hintText: 'Password',
+                    labelText: 'Password',
+                    prefixIcon: Icon(
+                      Icons.key,
+                      color: Color.fromARGB(255, 78, 66, 66),
                     ),
+                    border: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.red
+                      ),
+                      borderRadius: BorderRadius.all(Radius.circular(20.0))
+                    )
                   ),
+                ),
 
-                  const SizedBox(height: 40.0),
-                  TextFormField(
-                    controller: phoneController,
-                    decoration: const InputDecoration(
-                      hintText: 'Phone No',
-                      labelText: 'Phone No',
-                      border: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.red),
-                        borderRadius: BorderRadius.all(Radius.circular(9.0))
-                      )
+                const SizedBox(height: 40.0),
+                TextFormField(
+                  controller: phoneController,
+                  decoration: const InputDecoration(
+                    hintText: 'Phone No',
+                    labelText: 'Phone No',
+                    prefixIcon: Icon(
+                      Icons.phone,
+                      color: Color.fromARGB(255, 78, 66, 66),
                     ),
+                    border: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.red),
+                      borderRadius: BorderRadius.all(Radius.circular(20.0))
+                    )
                   ),
+                ),
 
-                  const SizedBox(height: 40.0),
-                  ElevatedButton(
-                    onPressed: () async{
-                      final supabase = Supabase.instance.client;
-                      String name = nameController.text;  
-                      String email = emailController.text;
-                      String password = passwordController.text;
-                      String phone = phoneController.text;
+                const SizedBox(height: 40.0),
+                ElevatedButton(
+                  onPressed: () async {
+                    final supabase = Supabase.instance.client;
+                    String name = nameController.text;
+                    String email = emailController.text;
+                    String password = passwordController.text;
+                    String phone = phoneController.text;
 
-                      if (name.isEmpty || email.isEmpty || password.isEmpty || phone.isEmpty) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text('Please fill all details.'),
-                            duration: Duration(seconds: 3),
-                          )
-                        );
-                        return;
-                      }
-                      else{
-                        final AuthResponse res = await supabase.auth.signUp(
+                    if (name.isEmpty || email.isEmpty || password.isEmpty || phone.isEmpty) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text('Please fill all details.'),
+                          duration: Duration(seconds: 3),
+                        )
+                      );
+                      return;
+                    }
+                    else{
+                      final AuthResponse res = await supabase.auth.signUp(
                         email: email,
                         password: password
                       );
 
                       final Map<String , dynamic> userDetails = {
-                        'exhibitor_id' :res.user!.id,
+                        'user_id' :res.user!.id,
                         'name' : name,
                         'phone' : phone
                       };
 
                       await supabase.from('ex_profile').upsert([userDetails]);
 
-                        // ignore: use_build_context_synchronously
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text('Account Created Successfully.'),
-                            duration: Duration(seconds: 3),
-                          )
-                        );
-                      }
+                      // ignore: use_build_context_synchronously
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text('Account Created Successfully.'),
+                          duration: Duration(seconds: 3),
+                        )
+                      );
+                    }
 
-                      // final response = await supabase
-                      // await supabase
-                      // .from('ex_account')
-                      // .upsert([
-                      //   {'name': name, 'email': email, 'password': password, 'phone': phone}
-                      //   ]);
-
-                        // ignore: use_build_context_synchronously
-                        Navigator.pushNamed(context, '/exhibitor');
+                    // ignore: use_build_context_synchronously
+                    Navigator.pushNamed(context, '/exhibitor');
                     
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.green,
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 50,
-                        vertical: 15
-                      )
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color.fromARGB(255, 99, 172, 172),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 90,
+                      vertical: 15
                     ),
-                    child: const Text(
-                      'Create Account',
-                      style: TextStyle(fontSize: 20.0),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20)
                     ),
                   ),
-                ],
-              )
-              
-            ),
+                  child: const Text(
+                    'Create Account',
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 20.0,
+                      fontFamily: 'NovaSquare',
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 125,)
+              ],
+            )
             
           ),
-          ),
+          
         ),
-      )
-    );
+        ),
+      ) ;
   }
 }

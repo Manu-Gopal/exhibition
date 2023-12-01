@@ -12,6 +12,7 @@ class ExhibitionManagerLogin extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.cyan,
+        
         body: SingleChildScrollView(
           child: Container(
           width: double.infinity,

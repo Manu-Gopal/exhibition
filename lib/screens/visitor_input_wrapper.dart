@@ -156,6 +156,7 @@ class VisitorInputWrapper extends StatelessWidget {
                     'Sign In',
                     style: TextStyle(
                       fontSize: 20.0,
+                      color: Colors.black,
                       fontFamily: 'NovaSquare',
                       ),
                   ),

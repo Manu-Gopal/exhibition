@@ -16,6 +16,7 @@ class Header extends StatelessWidget {
             child: Text('Login',
             style: TextStyle(
               color: Colors.white,
+              fontWeight: FontWeight.bold,
               fontFamily: 'NovaSquare',
               fontSize: 40
             ),),
@@ -26,6 +27,7 @@ class Header extends StatelessWidget {
             style: TextStyle(
               color: Colors.white,
               fontFamily: 'NovaSquare',
+              fontWeight: FontWeight.bold,
               fontSize: 18
             ),),
           )

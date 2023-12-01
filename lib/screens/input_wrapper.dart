@@ -155,6 +155,7 @@ class InputWrapper extends StatelessWidget {
                   child: const Text(
                     'Sign In',
                     style: TextStyle(
+                      color: Colors.black,
                       fontSize: 20.0,
                       fontFamily: 'NovaSquare',
                     ),
@@ -169,7 +170,7 @@ class InputWrapper extends StatelessWidget {
               const Text(
                 "Don't have an account..? ",
                 style: TextStyle(
-                  fontSize: 15,
+                  fontSize: 17,
                   fontWeight: FontWeight.bold,
                   fontFamily: 'NovaSquare',
                   color: Colors.black,
@@ -182,7 +183,7 @@ class InputWrapper extends StatelessWidget {
                 child: const Text(
                   'Sign up',
                   style: TextStyle(
-                    fontSize: 15,
+                    fontSize: 17,
                     fontWeight: FontWeight.bold,
                     fontFamily: 'NovaSquare',
                     color: Colors.blue,
