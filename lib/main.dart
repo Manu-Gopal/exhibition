@@ -51,7 +51,7 @@ class MyApp extends StatelessWidget {
         '/exhibition_manager_account' :(context) => ExhibitionManagerAccount(),
         '/exhibition_manager' :(context) => ExhibitionManagerLogin(),
         '/exhibition_manager_main' :(context) => const ExhibitionManagerMain(),
-        '/add_exhibition':(context) => AddExhibition(),
+        '/add_exhibition':(context) => const AddExhibition(),
         '/list_stall':(context) => const ExhibitorListStall(),
         '/add_stall' :(context) => const AddStall(),
         '/list_items' :(context) => const ExhibitorListitems(),

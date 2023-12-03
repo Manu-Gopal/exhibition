@@ -12,7 +12,9 @@ class VisitorMain extends StatefulWidget {
 class _ExhibitorMainState extends State<VisitorMain> {
   final supabase = Supabase.instance.client;
   // ignore: non_constant_identifier_names
-  final exhibition_list = Supabase.instance.client.from('ex_manager').stream(primaryKey: ['id']).order('id');
+  final exhibition_list = Supabase.instance.client
+      .from('ex_manager')
+      .stream(primaryKey: ['id']).order('id');
 
   dynamic exhibitions;
   // int _currentIndex = 0;
@@ -20,13 +22,13 @@ class _ExhibitorMainState extends State<VisitorMain> {
   dynamic useremail = '';
 
   @override
-  void initState(){
+  void initState() {
     super.initState();
     useremail = supabase.auth.currentUser!.email;
     getExhibitions();
   }
 
-  Future getExhibitions() async{
+  Future getExhibitions() async {
     setState(() {
       isLoading = true;
     });
@@ -47,13 +49,33 @@ class _ExhibitorMainState extends State<VisitorMain> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              const Text(
+                  'Exhibitions',
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: 'NovaSquare',
+                    color:
+                        Colors.black, // Choose the color you want for the title
+                  ),
+                ),
+                const SizedBox(height: 25),
               Expanded(
                 child: StreamBuilder(
                   stream: exhibition_list,
                   builder: (context, AsyncSnapshot snapshot) {
                     if (snapshot.hasData) {
                       final exhibitionList = snapshot.data!;
-                      return ListView.builder(
+                      return GridView.builder(
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount:
+                              1, // Adjust the crossAxisCount as needed
+                          crossAxisSpacing:
+                              8.0, // Adjust the crossAxisSpacing as needed
+                          mainAxisSpacing:
+                              8.0, // Adjust the mainAxisSpacing as needed
+                        ),
                         itemCount: exhibitionList.length,
                         itemBuilder: (context, index) {
                           return Container(
@@ -61,40 +83,44 @@ class _ExhibitorMainState extends State<VisitorMain> {
                             padding: const EdgeInsets.all(8.0),
                             decoration: BoxDecoration(
                               border: Border.all(color: Colors.grey),
-                              borderRadius: const BorderRadius.all(Radius.circular(10)),
+                              borderRadius:
+                                  const BorderRadius.all(Radius.circular(10)),
                             ),
                             child: ListTile(
                               title: Text(
                                 exhibitionList[index]['exhibition_name'],
-                                style: const TextStyle(fontWeight: FontWeight.bold),
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.bold, fontSize: 20),
                               ),
                               subtitle: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text('Place: ${exhibitionList[index]['exhibition_place']}'),
-                                  Text('Organization: ${exhibitionList[index]['organization']}'),
-                                  Text('Start Date: ${exhibitionList[index]['start_date']}'),
-                                  Text('End Date: ${exhibitionList[index]['end_date']}'),
+                                  Text(
+                                    'Place: ${exhibitionList[index]['exhibition_place']}',
+                                    style: const TextStyle(fontSize: 17),
+                                  ),
+                                  Text(
+                                    'Organization: ${exhibitionList[index]['organization']}',
+                                    style: const TextStyle(fontSize: 17),
+                                  ),
+                                  Text(
+                                    'Start Date: ${exhibitionList[index]['start_date']}',
+                                    style: const TextStyle(fontSize: 17),
+                                  ),
+                                  Text(
+                                    'End Date: ${exhibitionList[index]['end_date']}',
+                                    style: const TextStyle(fontSize: 17),
+                                  ),
                                 ],
                               ),
-                              trailing: Container(
-                                decoration: const BoxDecoration(
-                                  color: Colors.grey,
-                                  shape: BoxShape.rectangle,
-                                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                              trailing: IconButton(
+                                  onPressed: () {
+                                    Navigator.pushNamed(context, '/visitor_list_stall', arguments: {
+                                      'exhibition_id': exhibitionList[index]['id'],
+                                    });
+                                  },
+                                  icon: const Icon(Icons.keyboard_arrow_right_outlined, size: 35, color: Colors.black),
                                 ),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(5.0),
-                                  child: GestureDetector(
-                                    onTap: () {
-                                      Navigator.pushNamed(context, '/visitor_list_stall',arguments: {
-                                        'exhibition_id' :exhibitionList[index]['id'] 
-                                      });
-                                    },
-                                    child: const Icon(Icons.keyboard_arrow_right_outlined, size: 25, color: Colors.black),
-                                  ),
-                                ),
-                              ),
                             ),
                           );
                         },
@@ -120,18 +146,14 @@ class CustomDrawer extends StatefulWidget {
 }
 
 class CustomDrawerState extends State<CustomDrawer> {
-
   final supabase = Supabase.instance.client;
   dynamic useremail = '';
   int bookQty = 0;
-
-  
 
   @override
   void initState() {
     super.initState();
     useremail = supabase.auth.currentUser!.email;
-
   }
 
   @override
@@ -141,7 +163,7 @@ class CustomDrawerState extends State<CustomDrawer> {
       child: ListView(
         padding: EdgeInsets.zero,
         children: [
-           UserAccountsDrawerHeader(
+          UserAccountsDrawerHeader(
             accountName: const Text(
               'Leo Messi',
               style: TextStyle(
@@ -161,7 +183,6 @@ class CustomDrawerState extends State<CustomDrawer> {
           ),
           ListTile(
             onTap: () {
-
               Navigator.pushNamed(context, '/visitor_bookings');
               // Navigator.push(context, MaterialPageRoute(builder: (context) => const VisitorBookings()));
             },
@@ -175,7 +196,7 @@ class CustomDrawerState extends State<CustomDrawer> {
             ),
           ),
           ListTile(
-            onTap: () async {              
+            onTap: () async {
               await supabase.auth.signOut();
               // ignore: use_build_context_synchronously
               Navigator.pushNamed(context, '/');

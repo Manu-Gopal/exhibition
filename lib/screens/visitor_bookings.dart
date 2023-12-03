@@ -67,6 +67,16 @@ class _VisitorBookingsState extends State<VisitorBookings> {
                   builder: (context, AsyncSnapshot snapshot) {
                     if (snapshot.hasData){
                       final itemList  = snapshot.data!;
+                      if (itemList.isEmpty) {
+                          return const Center(
+                            child: Text("No Orders Yet",
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20
+                              ),
+                            ),
+                          );
+                        }
                       return ListView.builder(
                         itemCount: itemList.length,
                         itemBuilder: (context, index){

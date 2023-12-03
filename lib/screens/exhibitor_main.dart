@@ -16,6 +16,8 @@ class _ExhibitorMainState extends State<ExhibitorMain> {
   // ignore: non_constant_identifier_names
   final exhibition_list =
       Supabase.instance.client.from('ex_manager').stream(primaryKey: ['id']).order('id');
+      
+  dynamic userId = Supabase.instance.client.auth.currentUser!.id;
 
   dynamic exhibitions;
   bool isLoading = false;
@@ -30,12 +32,6 @@ class _ExhibitorMainState extends State<ExhibitorMain> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        backgroundColor: Colors.blueAccent,
-        title: const Text("Exhibitor Main"),
-        centerTitle: true,
-      ),
 
       body:  IndexedStack(
         index: _selectedIndex,

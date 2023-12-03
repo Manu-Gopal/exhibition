@@ -155,7 +155,8 @@ class InputWrapper extends StatelessWidget {
                   child: const Text(
                     'Sign In',
                     style: TextStyle(
-                      color: Colors.black,
+                      // color: Colors.black,
+                      color: Colors.white,
                       fontSize: 20.0,
                       fontFamily: 'NovaSquare',
                     ),

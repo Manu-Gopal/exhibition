@@ -63,16 +63,15 @@ class _ExhibitorProfileState extends State<ExhibitorProfile> {
       const Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          SizedBox(height: 200,),
           Text(
             "Account Details",
             style: TextStyle(
-              fontSize: 20,
+              fontSize: 28,
+              fontFamily: 'NovaSquare',
               fontWeight: FontWeight.bold,
             ),
           ),
-          SizedBox(
-            height: 50,
-          )
         ],
       ),
       const SizedBox(height: 15),
@@ -87,31 +86,39 @@ class _ExhibitorProfileState extends State<ExhibitorProfile> {
       Padding(
         padding: const EdgeInsets.fromLTRB(0, 30, 0, 0),
         child: ElevatedButton(
-            style: ButtonStyle(
-                shape: MaterialStatePropertyAll(RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10))),
-                elevation: const MaterialStatePropertyAll(3)),
-            onPressed: () async {
-              await Supabase.instance.client.auth.signOut();
-              // ignore: use_build_context_synchronously
-              Navigator.pushNamed(context, '/');
-            },
-            child: const Padding(
-              padding: EdgeInsets.fromLTRB(0, 15, 0, 15),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'Log Out',
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold),
-                  ),
-                  Icon(Icons.logout, color: Colors.pinkAccent)
-                ],
-              ),
+          style: ButtonStyle(
+            shape: MaterialStateProperty.all(RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),
             )),
+            elevation: MaterialStateProperty.all(3),
+            backgroundColor: MaterialStateProperty.all(
+                Colors.grey), // Set the background color here
+          ),
+          onPressed: () async {
+            await Supabase.instance.client.auth.signOut();
+            // ignore: use_build_context_synchronously
+            Navigator.pushNamed(context, '/');
+          },
+          child: const Padding(
+            padding: EdgeInsets.fromLTRB(0, 15, 0, 15),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  'Log Out',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                SizedBox(
+                    width: 8), // Add some spacing between text and icon
+                Icon(Icons.logout, color: Colors.black),
+              ],
+            ),
+          ),
+        ),
       )
     ]);
   }

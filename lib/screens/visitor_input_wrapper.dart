@@ -1,5 +1,3 @@
-// import 'package:exhibition/screens/button.dart';
-// import 'package:exhibition/screens/input_field.dart';
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -14,7 +12,6 @@ class VisitorInputWrapper extends StatelessWidget {
       padding: const EdgeInsets.all(30),
       child: Column(
         children: <Widget>[
-          // const SizedBox(height: 50,),
           const SizedBox(height: 25,),
           Container(
             decoration: BoxDecoration(
@@ -22,13 +19,8 @@ class VisitorInputWrapper extends StatelessWidget {
               borderRadius: BorderRadius.circular(10)
             ),
             
-
-            // child: InputField(),
-
-
             child : Column(
       children: <Widget>[
-        // const SizedBox(height: 50,),
         Container(
           padding: const EdgeInsets.all(10),
           decoration: const BoxDecoration(
@@ -54,14 +46,6 @@ class VisitorInputWrapper extends StatelessWidget {
                     )
                   ),
                 ),
-          //  const TextField(
-          //   controller: emailController,
-          //   decoration: InputDecoration(
-          //     hintText: "Enter your email",
-          //     hintStyle: TextStyle(color: Colors.grey),
-          //     border: InputBorder.none
-          //   ),
-          // ),
         ),
         Container(
           padding: const EdgeInsets.all(10),
@@ -90,14 +74,6 @@ class VisitorInputWrapper extends StatelessWidget {
                     )
                   ),
                 ),
-          // const TextField(
-          //   obscureText: true,
-          //   decoration: InputDecoration(
-          //     hintText: "Enter your password",
-          //     hintStyle: TextStyle(color: Colors.grey),
-          //     border: InputBorder.none
-          //   ),
-          // ),
         ),
       ],
     ),
@@ -199,43 +175,3 @@ class VisitorInputWrapper extends StatelessWidget {
     );
   }
 }
-
-
-
-
-
-// import 'package:exhibition/screens/button.dart';
-// import 'package:exhibition/screens/visitor_input_field.dart';
-// import 'package:flutter/material.dart';
-
-// class VisitorInputWrapper extends StatelessWidget {
-//   const VisitorInputWrapper({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Padding(
-//       padding: const EdgeInsets.all(30),
-//       child: Column(
-//         children: <Widget>[
-//           // const SizedBox(height: 50,),
-//           const SizedBox(height: 40,),
-//           Container(
-//             decoration: BoxDecoration(
-//               color: Colors.white,
-//               borderRadius: BorderRadius.circular(10)
-//             ),
-//             child: const VisitorInputField(),
-//           ),
-//           const SizedBox(height: 40,),
-//           const Text('forgot',
-//           style: TextStyle(color: Colors.grey),
-//           ),
-//           const SizedBox(
-//             height: 40,
-//           ),
-//           const Button()
-//         ],
-//       ), 
-//     );
-//   }
-// }

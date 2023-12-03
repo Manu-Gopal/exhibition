@@ -51,13 +51,33 @@ class _VisitorListStallState extends State<VisitorListStall> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              const Text(
+                  'Stalls',
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: 'NovaSquare',
+                    color:
+                        Colors.black, // Choose the color you want for the title
+                  ),
+                ),
+                const SizedBox(height: 25),
               Expanded(
                 child: StreamBuilder(
                   stream: stallList,
                   builder: (context, AsyncSnapshot snapshot) {
                     if (snapshot.hasData) {
                       final stallList = snapshot.data!;
-
+                      if (stallList.isEmpty) {
+                          return const Center(
+                            child: Text("No Stalls Yet",
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20
+                              ),
+                            ),
+                          );
+                        }
                       return ListView.builder(
                           itemCount: stallList.length,
                           itemBuilder: (context, index) {

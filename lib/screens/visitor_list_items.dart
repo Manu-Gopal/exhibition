@@ -72,13 +72,35 @@ class _AddItemsState extends State<VisitorListitems> {
                 )
                 )
               ),
+              const SizedBox(height: 30,),
+
+              const Text(
+                  'Items',
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: 'NovaSquare',
+                    color:
+                        Colors.black, // Choose the color you want for the title
+                  ),
+                ),
+                const SizedBox(height: 25),
               Expanded(
                 child: StreamBuilder(
                   stream: itemLists,
                   builder: (context, AsyncSnapshot snapshot) {
                     if (snapshot.hasData) {
                       final itemList = snapshot.data!;
-
+                      if (itemList.isEmpty) {
+                          return const Center(
+                            child: Text("No Items Yet",
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20
+                              ),
+                            ),
+                          );
+                        }
                       return ListView.builder(
                           itemCount:itemList.length,
                           itemBuilder: (context, index) {

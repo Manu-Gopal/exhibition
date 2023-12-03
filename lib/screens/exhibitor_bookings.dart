@@ -13,6 +13,7 @@ class ExhibitorBookings extends StatefulWidget {
 }
 
 class _ExhibitorBookingsState extends State<ExhibitorBookings> {
+
   final supabase = Supabase.instance.client;
 
   // ignore: non_constant_identifier_names
@@ -26,6 +27,7 @@ class _ExhibitorBookingsState extends State<ExhibitorBookings> {
   // ignore: non_constant_identifier_names
   dynamic book_list;
   dynamic itemLists;
+  dynamic exhibitorId = Supabase.instance.client.auth.currentUser!.id;
 
   @override
   void initState() {
@@ -35,9 +37,9 @@ class _ExhibitorBookingsState extends State<ExhibitorBookings> {
 
   Future getBookingDetails() async{
 
-    final exhibitorProfile = await supabase.from('ex_profile').select('id').match({'exhibitor_id': supabase.auth.currentUser!.id});
+    // final exhibitorProfile = await supabase.from('ex_profile').select('id').match({'exhibitor_id': supabase.auth.currentUser!.id});
 
-    final stalls = await supabase.from('add_stall').select().match({'exhibitor_id':exhibitorProfile[0]['id']});
+    final stalls = await supabase.from('add_stall').select().match({'exhibitor_id':exhibitorId});
 
     itemLists = Supabase.instance.client
       .from('add_items')
@@ -98,6 +100,16 @@ class _ExhibitorBookingsState extends State<ExhibitorBookings> {
             builder: (context, AsyncSnapshot snapshot) {
               if (snapshot.hasData) {
                 final bookList = snapshot.data!;
+                if (bookList.isEmpty) {
+                          return const Center(
+                            child: Text("No bookings",
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20
+                              ),
+                            ),
+                          );
+                        }
                 return ListView.builder(
                   itemCount: bookList.length,
                   itemBuilder: (context, index) {

@@ -13,6 +13,7 @@ class AddStallState extends State<AddStall> {
   final TextEditingController stalltypeController = TextEditingController();
 
   dynamic exhibitionId;
+  dynamic exhibitorId = Supabase.instance.client.auth.currentUser!.id;
 
   @override
   void initState() {
@@ -24,39 +25,76 @@ class AddStallState extends State<AddStall> {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 246, 244, 244),
-      body: Center(
-        child: SingleChildScrollView(
-          child: Center(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  TextFormField(
-                    controller: stallnameController,
-                    decoration: const InputDecoration(
-                      hintText: 'Stall Name',
-                      labelText: 'Stall Name',
-                      border: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.red),
-                          borderRadius: BorderRadius.all(Radius.circular(9.0))),
-                    ),
+      backgroundColor: Colors.cyan,
+      body: SingleChildScrollView(
+        child: Container(
+          decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  colors: [
+                    Color.fromARGB(255, 3, 144, 163),
+                    Color.fromARGB(255, 3, 201, 227),
+                    Color.fromARGB(255, 2, 155, 175)
+                  ]
+              )
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const SizedBox(height: 130),
+                const Text(
+                  'Add a Stall', // Heading text
+                  style: TextStyle(
+                    fontSize: 30,
+                    fontFamily: 'NovaSquare',
+                    fontWeight: FontWeight.bold,
+                    color: Color.fromARGB(255, 78, 66, 66),
                   ),
-                  const SizedBox(height: 40.0),
-                  TextFormField(
-                    controller: stalltypeController,
-                    decoration: const InputDecoration(
-                      hintText: 'Stall Type',
-                      labelText: 'Stall Type',
-                      border: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.red),
-                          borderRadius: BorderRadius.all(Radius.circular(9.0))),
-                    ),
+                ),
+                const SizedBox(height: 50,),
+                Container(
+                  height: 300, // Set the desired height for the container
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    color: Colors.white, // Set the background color for the container
+                    borderRadius: BorderRadius.circular(20),
                   ),
-                  const SizedBox(height: 40.0),
-                  ElevatedButton(
+                  child: Column(
+                    children: [
+                      const SizedBox(height: 20),
+                      TextFormField(
+                        controller: stallnameController,
+                        decoration: const InputDecoration(
+                            hintText: 'Stall Name',
+                            labelText: 'Stall Name', 
+                            border: OutlineInputBorder(
+                                borderSide: BorderSide(color: Colors.red),
+                                borderRadius: BorderRadius.all(Radius.circular(20.0))
+                            )
+                        ),
+                      ),
+                      const SizedBox(height: 20.0),
+                      TextFormField(
+                        controller: stalltypeController,
+                        decoration: const InputDecoration(
+                            hintText: 'Stall type',
+                            labelText: 'Stall type',
+                            // prefixIcon: Icon(
+                            //   Icons.mail,
+                            //   color: Color.fromARGB(255, 78, 66, 66),
+                            // ),
+                            border: OutlineInputBorder(
+                                borderSide: BorderSide(color: Colors.white),
+                                borderRadius: BorderRadius.all(Radius.circular(20.0))
+                            )
+                        ),
+                      ),                   
+                      const SizedBox(height: 30,),
+                                  ElevatedButton(
                     onPressed: () async {
                       final supabase = Supabase.instance.client;
                       String stallName = stallnameController.text;
@@ -74,7 +112,8 @@ class AddStallState extends State<AddStall> {
                         final Map<String, dynamic> userDetails = {
                           'stall_name': stallName,
                           'stall_type': stallType,
-                          'exhibition_id': exhibitionId['exhibition_id']
+                          'exhibition_id': exhibitionId['exhibition_id'],
+                          'exhibitor_id' : exhibitorId
                         };
 
                         await supabase.from('add_stall').insert(userDetails);
@@ -92,21 +131,25 @@ class AddStallState extends State<AddStall> {
                       Navigator.pop(context);
                     },
                     style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.green,
-                        padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 15)),
+                    backgroundColor: const Color.fromARGB(255, 99, 172, 172),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 85,
+                        vertical: 17
+                    ),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20)
+                    ),
+                  ),
                     child: const Text(
                       'Add',
                       style: TextStyle(fontSize: 20.0),
                     ),
                   ),
-                  ElevatedButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      child: const Text("back")
-                    )
-                ],
-              ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 200,)
+              ],
             ),
           ),
         ),

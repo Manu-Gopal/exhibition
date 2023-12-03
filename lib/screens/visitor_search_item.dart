@@ -107,11 +107,7 @@ class _VisitorSearchItemState extends State<VisitorSearchItem> {
                                             'item_id' : itemList[index]['id'],
                                             'stall_id' : itemList[index]['stall_id'],
                                             'exhibition_id' : exId,
-                                            // 'stall_id': stallList[index]['id']
                                           });
-                                        //  Navigator.pushNamed(context,'/visitor_search_item', arguments: {
-                                        //   'stallId': stallId['stall_id'], 'searchText': searchController.text
-                                        // });
                                       },
                                       child: const Text(
                                         'Book Now',

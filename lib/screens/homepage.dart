@@ -74,7 +74,7 @@ class HomePage extends StatelessWidget {
                     },
                     style: ButtonStyle(
                       backgroundColor:
-                          MaterialStateProperty.all<Color>(const Color.fromARGB(255, 99, 172, 172)),
+                          MaterialStateProperty.all<Color>(Colors.white),
                       shape: MaterialStateProperty.all<OutlinedBorder>(
                         RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10.0)),
@@ -103,7 +103,7 @@ class HomePage extends StatelessWidget {
                     },
                     style: ButtonStyle(
                       backgroundColor:
-                          MaterialStateProperty.all<Color>(const Color.fromARGB(255, 99, 172, 172)),
+                          MaterialStateProperty.all<Color>(Colors.white),
                       shape: MaterialStateProperty.all<OutlinedBorder>(
                         RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10.0)),
@@ -126,7 +126,7 @@ class HomePage extends StatelessWidget {
                     },
                     style: ButtonStyle(
                       backgroundColor:
-                          MaterialStateProperty.all<Color>(const Color.fromARGB(255, 99, 172, 172)),
+                          MaterialStateProperty.all<Color>(Colors.white),
                       shape: MaterialStateProperty.all<OutlinedBorder>(
                         RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10.0)),
