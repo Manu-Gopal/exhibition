@@ -38,99 +38,204 @@ class _ExhibitorMainState extends State<VisitorMain> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.blueAccent,
-        title: const Text("Visitor Main"),
+        backgroundColor: Colors.cyan[400],
+        title: const Text(
+          "Visitor",
+          style: TextStyle(
+            fontSize: 25,
+          ),
+        ),
         centerTitle: true,
       ),
       drawer: const CustomDrawer(),
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(16),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Text(
+      body: Container(
+        decoration: const BoxDecoration(
+            gradient:LinearGradient(
+          colors: [Color(0xffe7fdf8), Color(0xff80ebf9)],
+          stops: [0.25, 0.75],
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+        )
+      
+      ),
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text(
                   'Exhibitions',
                   style: TextStyle(
-                    fontSize: 24,
+                    fontSize: 28,
                     fontWeight: FontWeight.bold,
-                    fontFamily: 'NovaSquare',
+                    fontFamily: 'Poppins',
                     color:
                         Colors.black, // Choose the color you want for the title
                   ),
                 ),
                 const SizedBox(height: 25),
-              Expanded(
-                child: StreamBuilder(
-                  stream: exhibition_list,
-                  builder: (context, AsyncSnapshot snapshot) {
-                    if (snapshot.hasData) {
-                      final exhibitionList = snapshot.data!;
-                      return GridView.builder(
-                        gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount:
-                              1, // Adjust the crossAxisCount as needed
-                          crossAxisSpacing:
-                              8.0, // Adjust the crossAxisSpacing as needed
-                          mainAxisSpacing:
-                              8.0, // Adjust the mainAxisSpacing as needed
-                        ),
-                        itemCount: exhibitionList.length,
-                        itemBuilder: (context, index) {
-                          return Container(
-                            margin: const EdgeInsets.all(8.0),
-                            padding: const EdgeInsets.all(8.0),
-                            decoration: BoxDecoration(
-                              border: Border.all(color: Colors.grey),
-                              borderRadius:
-                                  const BorderRadius.all(Radius.circular(10)),
-                            ),
-                            child: ListTile(
-                              title: Text(
-                                exhibitionList[index]['exhibition_name'],
-                                style: const TextStyle(
-                                    fontWeight: FontWeight.bold, fontSize: 20),
-                              ),
-                              subtitle: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    'Place: ${exhibitionList[index]['exhibition_place']}',
-                                    style: const TextStyle(fontSize: 17),
-                                  ),
-                                  Text(
-                                    'Organization: ${exhibitionList[index]['organization']}',
-                                    style: const TextStyle(fontSize: 17),
-                                  ),
-                                  Text(
-                                    'Start Date: ${exhibitionList[index]['start_date']}',
-                                    style: const TextStyle(fontSize: 17),
-                                  ),
-                                  Text(
-                                    'End Date: ${exhibitionList[index]['end_date']}',
-                                    style: const TextStyle(fontSize: 17),
-                                  ),
-                                ],
-                              ),
-                              trailing: IconButton(
-                                  onPressed: () {
-                                    Navigator.pushNamed(context, '/visitor_list_stall', arguments: {
-                                      'exhibition_id': exhibitionList[index]['id'],
-                                    });
-                                  },
-                                  icon: const Icon(Icons.keyboard_arrow_right_outlined, size: 35, color: Colors.black),
+                Expanded(
+                  child: StreamBuilder(
+                    stream: exhibition_list,
+                    builder: (context, AsyncSnapshot snapshot) {
+                      if (snapshot.hasData) {
+                        final exhibitionList = snapshot.data!;
+                        return ListView.builder(
+                          // gridDelegate:
+                          //     const SliverGridDelegateWithFixedCrossAxisCount(
+                          //   crossAxisCount:
+                          //       1, // Adjust the crossAxisCount as needed
+                          //   crossAxisSpacing:
+                          //       8.0, // Adjust the crossAxisSpacing as needed
+                          //   mainAxisSpacing:
+                          //       8.0, // Adjust the mainAxisSpacing as needed
+                          // ),
+                          itemCount: exhibitionList.length,
+                          itemBuilder: (context, index) {
+                            return ClipRect(
+                              child: Container(
+                                margin: const EdgeInsets.all(8.0),
+                                decoration: const BoxDecoration(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10)),
                                 ),
-                            ),
-                          );
-                        },
-                      );
-                    }
-                    return Container();
-                  },
+                                child: Material(
+                                  elevation: 5,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  child: Container(
+                                    padding: const EdgeInsets.all(8.0),
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      border: Border.all(
+                                          color: const Color.fromARGB(
+                                              255, 187, 186, 186)),
+                                      borderRadius: const BorderRadius.all(
+                                          Radius.circular(10)),
+                                    ),
+                                    child: Column(
+                                      children: [
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text(
+                                              exhibitionList[index]
+                                                  ['exhibition_name'],
+                                              style: const TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 20,
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  right: 8.0),
+                                              child: IconButton(
+                                                onPressed: () {
+                                                  Navigator.pushNamed(context,
+                                                      '/visitor_list_stall',
+                                                      arguments: {
+                                                        'exhibition_id':
+                                                            exhibitionList[
+                                                                index]['id'],
+                                                      });
+                                                },
+                                                icon: const Icon(
+                                                    Icons
+                                                        .keyboard_arrow_right_outlined,
+                                                    size: 35,
+                                                    color: Colors.black),
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                        Row(
+                                          children: [
+                                            // const Icon(Icons.location_city),
+                                            const Text(
+                                              '@',
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 20),
+                                            ),
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  left: 8.0),
+                                              child: Text(
+                                                '${exhibitionList[index]['exhibition_place']}',
+                                                style: const TextStyle(
+                                                  fontSize: 17,
+                                                  // color: Colors.grey
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        const SizedBox(
+                                          height: 5,
+                                        ),
+                                        Row(
+                                          children: [
+                                            const Icon(Icons.eco),
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  left: 8.0),
+                                              child: Text(
+                                                '${exhibitionList[index]['organization']}',
+                                                style: const TextStyle(
+                                                    fontSize: 17),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        const SizedBox(
+                                          height: 5,
+                                        ),
+                                        Row(
+                                          children: [
+                                            const Icon(Icons.calendar_month),
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  left: 8.0),
+                                              child: Text(
+                                                '${exhibitionList[index]['start_date']}',
+                                                style: const TextStyle(
+                                                    fontSize: 17),
+                                              ),
+                                            ),
+                                            const Icon(
+                                              Icons.remove,
+                                              size: 20,
+                                            ),
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  left: 4.0),
+                                              child: Text(
+                                                '${exhibitionList[index]['end_date']}',
+                                                style: const TextStyle(
+                                                    fontSize: 17),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            );
+                          },
+                        );
+                      }
+                      return Container();
+                    },
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
@@ -148,6 +253,7 @@ class CustomDrawer extends StatefulWidget {
 class CustomDrawerState extends State<CustomDrawer> {
   final supabase = Supabase.instance.client;
   dynamic useremail = '';
+  dynamic username = '';
   int bookQty = 0;
 
   @override
@@ -165,7 +271,7 @@ class CustomDrawerState extends State<CustomDrawer> {
         children: [
           UserAccountsDrawerHeader(
             accountName: const Text(
-              'Leo Messi',
+              '',
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 20,
@@ -192,7 +298,7 @@ class CustomDrawerState extends State<CustomDrawer> {
             ),
             title: const Text(
               "My Orders",
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              style: TextStyle(fontFamily: 'RobotoSlab',fontSize: 20, fontWeight: FontWeight.bold),
             ),
           ),
           ListTile(
@@ -207,7 +313,7 @@ class CustomDrawerState extends State<CustomDrawer> {
             ),
             title: const Text(
               "Log Out",
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              style: TextStyle(fontFamily: 'RobotoSlab',fontSize: 20, fontWeight: FontWeight.bold),
             ),
           ),
         ],

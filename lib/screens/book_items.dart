@@ -117,7 +117,7 @@ class _BookItemsState extends State<BookItems> {
                   height: 50,
                 ),
                 Container(
-                  height: 590, // Set the desired height for the container
+                  height: 750, // Set the desired height for the container
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
                     color: Colors
@@ -133,7 +133,7 @@ class _BookItemsState extends State<BookItems> {
 
                           const SizedBox(height: 25),
                                     imageUrl != null
-                          ? Container(
+                          ? SizedBox(
                             height: 150,
                             width: 200,
                             child: Image.network(imageUrl))
@@ -142,12 +142,15 @@ class _BookItemsState extends State<BookItems> {
                           const SizedBox(height: 25),
                           Text(
                             "User Name : $userName",
-                            style: const TextStyle(fontSize: 20),
+                            style: const TextStyle(fontSize: 20,
+                            fontFamily: 'RobotoSlab',
+                            ),
                           ),
                           const SizedBox(height: 15),
                           Text(
                             "Item Name : $itemName",
-                            style: const TextStyle(fontSize: 20),
+                            style: const TextStyle(fontSize: 20,
+                            fontFamily: 'RobotoSlab',),
                           ),
                           const SizedBox(height: 15),
                           Row(
@@ -155,7 +158,8 @@ class _BookItemsState extends State<BookItems> {
                               const SizedBox(width: 25,),
                               Text(
                                 "Price      : $itemPrice",
-                                style: const TextStyle(fontSize: 20),
+                                style: const TextStyle(fontSize: 20,
+                                fontFamily: 'RobotoSlab',),
                               ),
                             ],
                           ),
@@ -167,7 +171,8 @@ class _BookItemsState extends State<BookItems> {
                               const SizedBox(width: 10,),
                               const Text(
                                 "Quantity   : ",
-                                style: TextStyle(fontSize: 20),
+                                style: TextStyle(fontSize: 20,
+                                fontFamily: 'RobotoSlab',),
                               ),
                               ElevatedButton(
                                 onPressed: () {
@@ -225,6 +230,15 @@ class _BookItemsState extends State<BookItems> {
                       const SizedBox(height: 30),
                       ElevatedButton(
                         onPressed: () async {
+                          if(quantity>=availableQty){
+                            ScaffoldMessenger.of(context)
+                              .showSnackBar(const SnackBar(
+                            content: Text(
+                                'The Desired Quantity is currently unavailable'),
+                            duration: Duration(seconds: 3),
+                          ));
+                          return;
+                          }
                           await supabase.from('book_item').insert({
                             'item_id': bookItemId,
                             'user_id': bookUserId,
@@ -249,7 +263,11 @@ class _BookItemsState extends State<BookItems> {
                           // ignore: use_build_context_synchronously
                           Navigator.pop(context);
                         },
-                        child: const Text("Book Now"),
+                        child: const Text("Book Now",
+                        style: TextStyle(
+                          fontFamily: 'RobotoSlab',
+                        ),
+                        ),
                       ),
                       const SizedBox(height: 30),
                       Container(
@@ -270,10 +288,14 @@ class _BookItemsState extends State<BookItems> {
                           ),
                         ),
                         
+                        
                       ),
                     ],
+                    
                   ),
+                  
                 ),
+                const SizedBox(height: 50,)
               ],
             ),
           ),

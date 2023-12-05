@@ -40,7 +40,13 @@ class _ExhibitionManagerMainState extends State<ExhibitionManagerMain> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        color: Colors.cyan[400],
+        decoration: const BoxDecoration(
+              gradient: LinearGradient(
+            colors: [Color(0xffe7fdf8), Color(0xff80ebf9)],
+            stops: [0.25, 0.75],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+          )),
         child: Center(
           child: Padding(
             padding: const EdgeInsets.all(16),
@@ -84,15 +90,6 @@ class _ExhibitionManagerMainState extends State<ExhibitionManagerMain> {
                           if (snapshot.hasData) {
                             final exhibitionList = snapshot.data!;
                             return ListView.builder(
-                                // gridDelegate:
-                                //     const SliverGridDelegateWithFixedCrossAxisCount(
-                                //   crossAxisCount:
-                                //       1, // Adjust the crossAxisCount as needed
-                                //   crossAxisSpacing:
-                                //       8.0, // Adjust the crossAxisSpacing as needed
-                                //   mainAxisSpacing:
-                                //       8.0, // Adjust the mainAxisSpacing as needed
-                                // ),
                                 itemCount: exhibitionList.length,
                                 itemBuilder: (context, index) {
                                   return Card(
@@ -116,6 +113,7 @@ class _ExhibitionManagerMainState extends State<ExhibitionManagerMain> {
                                                     ['exhibition_name'],
                                                 style: const TextStyle(
                                                   fontWeight: FontWeight.bold,
+                                                  fontFamily: 'RobotoSlab',
                                                   fontSize: 20,
                                                 ),
                                               ),
@@ -277,7 +275,7 @@ class _ExhibitionManagerMainState extends State<ExhibitionManagerMain> {
                         arguments: {'exhibition_manager_id': userId});
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.blueGrey,
+                    backgroundColor: const Color.fromARGB(255, 231, 162, 87),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(
                           20), // Adjust the value for circular edges

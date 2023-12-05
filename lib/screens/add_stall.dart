@@ -70,7 +70,10 @@ class AddStallState extends State<AddStall> {
                         controller: stallnameController,
                         decoration: const InputDecoration(
                             hintText: 'Stall Name',
-                            labelText: 'Stall Name', 
+                            labelText: 'Stall Name',
+                            prefixIcon: Icon(Icons.store,
+                            color: Color.fromARGB(255, 78, 66, 66),
+                            ),
                             border: OutlineInputBorder(
                                 borderSide: BorderSide(color: Colors.red),
                                 borderRadius: BorderRadius.all(Radius.circular(20.0))
@@ -83,10 +86,10 @@ class AddStallState extends State<AddStall> {
                         decoration: const InputDecoration(
                             hintText: 'Stall type',
                             labelText: 'Stall type',
-                            // prefixIcon: Icon(
-                            //   Icons.mail,
-                            //   color: Color.fromARGB(255, 78, 66, 66),
-                            // ),
+                            prefixIcon: Icon(
+                              Icons.category,
+                              color: Color.fromARGB(255, 78, 66, 66),
+                            ),
                             border: OutlineInputBorder(
                                 borderSide: BorderSide(color: Colors.white),
                                 borderRadius: BorderRadius.all(Radius.circular(20.0))

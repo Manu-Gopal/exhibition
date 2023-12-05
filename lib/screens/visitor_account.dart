@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class VisitorAccount extends StatelessWidget {
@@ -102,6 +103,9 @@ class VisitorAccount extends StatelessWidget {
                       const SizedBox(height: 20.0),
                       TextFormField(
                         controller: phoneController,
+                        keyboardType: TextInputType.number, inputFormatters: <TextInputFormatter> [
+                          FilteringTextInputFormatter.digitsOnly
+                        ],
                         decoration: const InputDecoration(
                             hintText: 'Phone No',
                             labelText: 'Phone No',
@@ -118,7 +122,6 @@ class VisitorAccount extends StatelessWidget {
                       const SizedBox(height: 40.0),
                 ElevatedButton(
                   onPressed: () async {
-                    // ... (rest of your code remains unchanged)
                     final supabase = Supabase.instance.client;
                     String name = nameController.text;
                     String email = emailController.text;

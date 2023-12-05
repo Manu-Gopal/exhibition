@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class ExhibitorAccount extends StatelessWidget {
@@ -6,7 +7,9 @@ class ExhibitorAccount extends StatelessWidget {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController phoneController = TextEditingController();
+  
   ExhibitorAccount({super.key});
+  
 
   @override
   Widget build(BuildContext context) {
@@ -102,6 +105,9 @@ class ExhibitorAccount extends StatelessWidget {
                       const SizedBox(height: 20.0),
                       TextFormField(
                         controller: phoneController,
+                        keyboardType: TextInputType.number, inputFormatters: <TextInputFormatter> [
+                          FilteringTextInputFormatter.digitsOnly
+                        ],
                         decoration: const InputDecoration(
                             hintText: 'Phone No',
                             labelText: 'Phone No',

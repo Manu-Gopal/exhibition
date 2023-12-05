@@ -242,6 +242,7 @@ class _ItemAcceptState extends State<ItemAccept> {
                               // ignore: use_build_context_synchronously
                               Navigator.pop(context);
                             }
+                            
                           },
                           style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.green,

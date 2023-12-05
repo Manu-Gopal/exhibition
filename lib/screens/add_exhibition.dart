@@ -108,7 +108,6 @@ class _AddExhibitionState extends State<AddExhibition> {
                       const SizedBox(height: 20.0),
                       TextFormField(
                         controller: organizationController,
-                        obscureText: true,
                         decoration: const InputDecoration(
                             hintText: 'Organization',
                             labelText: 'Organization',
@@ -208,7 +207,17 @@ class _AddExhibitionState extends State<AddExhibition> {
                             ));
                             return;
                           } else {
-                            final Map<String, dynamic> userDetails = {
+                            if(-(DateTime.parse(startDate)).difference(DateTime.parse(endDate))
+                            .inHours<0){
+                              ScaffoldMessenger.of(context)
+                                .showSnackBar(const SnackBar(
+                              content: Text('Please select appropriate dates.'),
+                              duration: Duration(seconds: 3),
+                            ));
+                            return;
+                            }
+                            else{
+                              final Map<String, dynamic> userDetails = {
                               'exhibition_name': exhibitionName,
                               'exhibition_place': place,
                               'organization': organization,
@@ -228,6 +237,11 @@ class _AddExhibitionState extends State<AddExhibition> {
                               content: Text('Exhibition addded Successfully.'),
                               duration: Duration(seconds: 3),
                             ));
+                            }
+                            
+                             // ignore: use_build_context_synchronously
+                            
+                             
                           }
 
                           // ignore: use_build_context_synchronously
@@ -235,7 +249,7 @@ class _AddExhibitionState extends State<AddExhibition> {
                               context, '/exhibition_manager_main');
                         },
                         style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.blueGrey,
+                    backgroundColor: const Color.fromARGB(255, 231, 162, 87),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(
                           20), // Adjust the value for circular edges
@@ -248,7 +262,9 @@ class _AddExhibitionState extends State<AddExhibition> {
                   ),
                         child: const Text(
                           'Add',
-                          style: TextStyle(fontSize: 20.0),
+                          style: TextStyle(fontSize: 20.0,
+                          fontFamily: 'NovaSquare',
+                          ),
                         ),
                       ),
                       // ElevatedButton(

@@ -29,7 +29,7 @@ class HomePage extends StatelessWidget {
                 'Exhibition',
                 style: TextStyle(
                     fontSize: 45,
-                    fontFamily: 'NovaSquare',
+                    fontFamily: 'Poppins',
                     fontWeight: FontWeight.bold,
                     color: Colors.black),
               )
@@ -42,7 +42,7 @@ class HomePage extends StatelessWidget {
                 'Management',
                 style: TextStyle(
                     fontSize: 45,
-                    fontFamily: 'NovaSquare',
+                    fontFamily: 'Poppins',
                     fontWeight: FontWeight.bold,
                     color: Colors.black),
               )
@@ -55,7 +55,7 @@ class HomePage extends StatelessWidget {
                 'System',
                 style: TextStyle(
                     fontSize: 45,
-                    fontFamily: 'NovaSquare',
+                    fontFamily: 'Poppins',
                     fontWeight: FontWeight.bold,
                     color: Colors.black),
               )
@@ -66,7 +66,7 @@ class HomePage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SizedBox(
-                width: 100,
+                width: 280,
                 height: 50,
                 child: ElevatedButton(
                     onPressed: () {
@@ -77,26 +77,27 @@ class HomePage extends StatelessWidget {
                           MaterialStateProperty.all<Color>(Colors.white),
                       shape: MaterialStateProperty.all<OutlinedBorder>(
                         RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10.0)),
+                            borderRadius: BorderRadius.circular(20.0)),
                       ),
                     ),
                     child: const Text(
                       'Exhibition Manager',
                       style: TextStyle(
-                          fontSize: 15,
+                          fontSize: 20,
+                          fontFamily: 'NovaSquare',
                           color: Colors.black,
                           fontWeight: FontWeight.bold),
                     )),
               ),
             ],
           ),
-          const SizedBox(height: 30),
+          const SizedBox(height: 20,),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               SizedBox(
-                width: 100,
+                width: 280,
+                height: 50,
                 child: ElevatedButton(
                     onPressed: () {
                       Navigator.pushNamed(context, '/exhibitor');
@@ -106,20 +107,27 @@ class HomePage extends StatelessWidget {
                           MaterialStateProperty.all<Color>(Colors.white),
                       shape: MaterialStateProperty.all<OutlinedBorder>(
                         RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10.0)),
+                            borderRadius: BorderRadius.circular(20.0)),
                       ),
                     ),
                     child: const Text(
                       'Exhibitor',
                       style: TextStyle(
-                          fontSize: 15,
+                          fontSize: 20,
+                          fontFamily: 'NovaSquare',
                           color: Colors.black,
                           fontWeight: FontWeight.bold),
                     )),
               ),
-              const SizedBox(width: 20),
+            ],
+          ),
+          const SizedBox(height: 20,),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
               SizedBox(
-                width: 100,
+                width: 280,
+                height: 50,
                 child: ElevatedButton(
                     onPressed: () {
                       Navigator.pushNamed(context, '/visitor');
@@ -129,19 +137,20 @@ class HomePage extends StatelessWidget {
                           MaterialStateProperty.all<Color>(Colors.white),
                       shape: MaterialStateProperty.all<OutlinedBorder>(
                         RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10.0)),
+                            borderRadius: BorderRadius.circular(20.0)),
                       ),
                     ),
                     child: const Text(
                       'Visitor',
                       style: TextStyle(
-                          fontSize: 15,
+                          fontSize: 20,
+                          fontFamily: 'NovaSquare',
                           color: Colors.black,
                           fontWeight: FontWeight.bold),
                     )),
-              )
+              ),
             ],
-          )
+          ),
         ],
     ),
   ),
